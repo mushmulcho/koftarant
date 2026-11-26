@@ -1,0 +1,25 @@
+{
+  "blog": "https://koftarant.blogspot.com",
+  "title": "Тарантският кофаджия",
+  "subtitle": "D&D, Warhammer и други кампании — архив и търсачка",
+  "campaigns": [
+    {"name": "Ранни сесии (10–20)", "match": "^(Там дам дам )?Сесия (1\\d|20)\\b"},
+    {"name": "Кампанията без Сашко", "match": "^(Сесия 1 - Кампанията без Сашко|КбС|СбС)"},
+    {"name": "Лунното море", "match": "^Лунното Море"},
+    {"name": "Spinoff: Waterdeep", "match": "^Spinoff"},
+    {"name": "City of the Spider Queen", "match": "^City of the Spider Queen \\d"},
+    {"name": "D&D 5e", "match": "^5[eе]\\s*[-–]\\s*\\d"},
+    {"name": "Tomb of Annihilation", "match": "^Tomb of Annihilation"},
+    {"name": "Pathfinder 2", "match": "^Pathfinder 2"},
+    {"name": "The D&D Halloween Special", "match": "^The D&D Halloween Special"},
+    {"name": "Eberron", "match": "^\\s*Eberron"},
+    {"name": "Черно слънце", "match": "черн(о|ото)\\s+слънце"},
+    {"name": "Curse of Strahd", "match": "^Curse of Strahd"},
+    {"name": "C҉Y҉_҉B҉O҉R҉G", "match": "^C\\u0489Y"},
+    {"name": "Mörk Borg", "match": "^(Mörk Borg|Морк Борг)"},
+    {"name": "WARHAMMER Enemy Within", "match": "^WARHAMMER( - (00|0,5)\\b| ENEMY WITHIN)"},
+    {"name": "WARHAMMER Death on the Reik", "match": "^WARHAMMER( -)? DEATH ON THE REIK"},
+    {"name": "WARHAMMER Power Behind the Throne", "match": "^WARHAMMER POWER BEHIND"},
+    {"name": "Nimble", "match": "^Nimble"}
+  ]
+}
