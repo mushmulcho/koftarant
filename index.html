@@ -5,59 +5,37 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Тарантският кофаджия</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<!-- Themes live in themes/*.css. "signal" is the default; a visitor's pick is kept in localStorage.
+     To add one: put a file in themes/ and a line in THEMES below. -->
+<script>
+const THEMES={signal:'Сигнал',mork:'Мьорк',grimoire:'Гримоар',plague:'Чума'}, DEFAULT_THEME='signal';
+let THEME=localStorage.getItem('theme'); if(!THEMES[THEME]) THEME=DEFAULT_THEME;
+document.write('<link id="theme-css" rel="stylesheet" href="themes/'+THEME+'.css">');
+</script>
 <style>
-:root{--bg:#16120e;--panel:#211b15;--line:#3a2f24;--ink:#e9dfcf;--dim:#a99a85;--gold:#d4a24c;--red:#b5523b;--mark:#d4a24c40}
-*{box-sizing:border-box}
-body{margin:0;background:var(--bg);color:var(--ink);font:17px/1.65 "Source Serif 4",Georgia,serif}
-a{color:var(--gold)}
-header{padding:2.2rem 1rem 1rem;text-align:center;border-bottom:1px solid var(--line);background:radial-gradient(ellipse at top,#2c2218,transparent 70%)}
-h1{font:700 clamp(2rem,5vw,3.2rem)/1.1 "Cormorant Garamond",serif;margin:0;letter-spacing:.02em}
-h1 a{color:var(--ink);text-decoration:none}
-.sub{color:var(--dim);margin:.3rem 0 0;font-style:italic}
-main{max-width:1180px;margin:0 auto;padding:1.2rem 1rem 4rem}
-.layout{display:grid;grid-template-columns:270px minmax(0,1fr);gap:2rem;align-items:start}
-.side{position:sticky;top:0;max-height:100vh;overflow:auto;padding:.8rem 0}
-.camps summary{cursor:pointer;color:var(--dim);font-size:.8rem;text-transform:uppercase;letter-spacing:.08em;margin-bottom:.5rem}
-.camp{display:flex;flex-direction:column;padding:.4rem .6rem;border-left:2px solid var(--line);text-decoration:none;color:var(--ink);font-size:.92rem;line-height:1.3}
-.camp small{color:var(--dim);font-size:.75rem}
-.camp:hover{border-color:var(--gold);color:var(--gold)}
-.camp.on{border-color:var(--gold);background:var(--panel);color:var(--gold)}
-.post{max-width:860px;margin:0 auto}
-@media(max-width:900px){.layout{grid-template-columns:1fr}.side{position:static;max-height:none}}
-.search{position:sticky;top:0;z-index:5;background:var(--bg);padding:.8rem 0;border-bottom:1px solid var(--line)}
-#q{width:100%;padding:.8rem 1rem;font:inherit;font-size:1.1rem;background:var(--panel);color:var(--ink);border:1px solid var(--line);border-radius:8px;outline:none}
-#q:focus{border-color:var(--gold)}
-.filters{display:flex;flex-wrap:wrap;gap:.4rem;margin-top:.7rem;align-items:center}
-.chip{border:1px solid var(--line);background:none;color:var(--dim);border-radius:99px;padding:.15rem .75rem;font:inherit;font-size:.85rem;cursor:pointer}
-.chip.on{background:var(--gold);color:#1b140c;border-color:var(--gold)}
-select{background:var(--panel);color:var(--ink);border:1px solid var(--line);border-radius:6px;font:inherit;font-size:.85rem;padding:.15rem .4rem}
-.count{color:var(--dim);font-size:.9rem;margin:1rem 0 .4rem}
-.item{display:block;padding:.9rem 0;border-bottom:1px solid var(--line);text-decoration:none;color:inherit}
-.item:hover h2{color:var(--gold)}
-.item h2{font:700 1.35rem/1.25 "Cormorant Garamond",serif;margin:0}
-.meta{color:var(--dim);font-size:.85rem}
-.tag{display:inline-block;border:1px solid var(--line);border-radius:4px;padding:0 .35rem;margin-right:.25rem;font-size:.78rem}
-.snip{margin:.3rem 0 0;color:#cfc3b0;font-size:.95rem}
-mark{background:var(--mark);color:var(--ink);border-radius:2px;padding:0 1px}
-article h2.t{font:700 clamp(1.7rem,4vw,2.4rem)/1.15 "Cormorant Garamond",serif;margin:.6rem 0 .3rem}
-.body{margin-top:1.2rem;overflow-wrap:anywhere}
-.body img{max-width:100%;height:auto;border-radius:4px}
-.body a img{display:inline-block}
-.body table{max-width:100%}
-.comments{margin-top:2.5rem;border-top:1px solid var(--line)}
-.comment{padding:.7rem 0;border-bottom:1px dashed var(--line);font-size:.95rem}
-.nav{display:flex;justify-content:space-between;gap:1rem;margin:2rem 0 0;font-size:.95rem}
-.back{display:inline-block;margin-top:.4rem;text-decoration:none}
-.more{display:block;margin:1.2rem auto;padding:.5rem 1.4rem;background:none;border:1px solid var(--gold);color:var(--gold);border-radius:6px;font:inherit;cursor:pointer}
-.warn{color:var(--red);font-size:.85rem}
-footer{color:var(--dim);font-size:.8rem;text-align:center;padding:2rem 1rem;border-top:1px solid var(--line)}
+/* theme button, top right: uses only variables every theme defines */
+header{position:relative}
+.themes{position:absolute;top:.8rem;right:.8rem;z-index:60;text-align:right;font:600 .7rem/1 ui-monospace,Menlo,monospace;letter-spacing:.12em;text-transform:uppercase}
+.themes button{font:inherit;letter-spacing:inherit;text-transform:inherit;cursor:pointer;border-radius:0}
+#theme-btn{background:var(--bg);color:var(--ink);border:1px solid var(--accent);padding:.45rem .7rem}
+#theme-btn:hover,#theme-btn[aria-expanded=true]{background:var(--accent);color:var(--bg)}
+.themes ul{list-style:none;margin:.3rem 0 0;padding:0;background:var(--bg);border:1px solid var(--accent);min-width:9rem;box-shadow:0 8px 24px rgba(0,0,0,.45)}
+.themes ul[hidden]{display:none}
+.themes li button{display:block;width:100%;text-align:left;background:none;border:0;color:var(--ink);padding:.6rem .8rem}
+.themes li button:hover{background:var(--line)}
+.themes li button[aria-checked=true]{color:var(--accent)}
+.themes li button[aria-checked=true]::after{content:" ✓"}
 </style>
 </head>
 <body>
 <header>
   <h1><a href="#" id="title">Тарантският кофаджия</a></h1>
   <p class="sub" id="subtitle"></p>
+  <div class="themes">
+    <button id="theme-btn" aria-haspopup="true" aria-expanded="false">◐ Тема</button>
+    <ul id="theme-list" role="menu" hidden></ul>
+  </div>
 </header>
 <main id="app"><p class="count">Зареждане…</p></main>
 <footer id="foot"></footer>
@@ -66,10 +44,25 @@ const $=s=>document.querySelector(s);
 const esc=s=>String(s??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 const norm=s=>s.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g,'').replace(/ё/g,'е');
 const fmt=d=>new Date(d).toLocaleDateString('bg-BG',{year:'numeric',month:'long',day:'numeric'});
-let DATA, POSTS=[], CAMPS=[], ORDER=[], state={q:'',label:'',camp:'',year:'',sort:'new',shown:30}, listScroll=0;
+let DATA, POSTS=[], CAMPS=[], ORDER=[], state={q:'',camp:'',shown:30}, listScroll=0;
 
 // DOMParser makes an inert document: unlike innerHTML on a div, it never loads the <img> files inside.
 function textOf(html){const d=new DOMParser().parseFromString(html.replace(/<(script|style)[\s\S]*?<\/\1>/gi,''),'text/html');return (d.body.textContent||'').replace(/\s+/g,' ').trim();}
+
+// Theme picker (top right). The choice is saved in this browser only.
+(function(){
+  const btn=$('#theme-btn'), list=$('#theme-list');
+  const draw=()=>{list.innerHTML=Object.entries(THEMES).map(([k,n])=>
+    `<li><button role="menuitemradio" aria-checked="${k===THEME}" data-t="${k}">${esc(n)}</button></li>`).join('');};
+  const open=v=>{list.hidden=!v;btn.setAttribute('aria-expanded',v);};
+  btn.onclick=e=>{e.stopPropagation();draw();open(list.hidden);};
+  list.onclick=e=>{const b=e.target.closest('button');if(!b)return;THEME=b.dataset.t;
+    $('#theme-css').href='themes/'+THEME+'.css';
+    if(THEME===DEFAULT_THEME)localStorage.removeItem('theme');else localStorage.setItem('theme',THEME);
+    open(false);};
+  document.addEventListener('click',e=>{if(!e.target.closest('.themes'))open(false);});
+  document.addEventListener('keydown',e=>{if(e.key==='Escape')open(false);});
+})();
 
 async function load(){
   const [cfg,data]=await Promise.all([fetch('config.json',{cache:'no-cache'}).then(r=>r.json()),fetch('data/posts.json',{cache:'no-cache'}).then(r=>r.json())]);
@@ -83,19 +76,20 @@ async function load(){
   POSTS.forEach(p=>{const i=CAMPS.findIndex(c=>c.re&&c.re.test(p.title.trim()));p.camp=i<0?CAMPS.length-1:i;});
   CAMPS.forEach((c,i)=>{const ps=POSTS.filter(p=>p.camp===i).map(p=>p.published).sort();c.n=ps.length;c.first=ps[0]||'';
     const y1=ps[0]?.slice(0,4),y2=ps[ps.length-1]?.slice(0,4);c.years=y1===y2?y1:y1+'–'+y2;});
-  // shown oldest campaign first, "Други" last
-  ORDER=CAMPS.map((c,i)=>i).filter(i=>CAMPS[i].n).sort((a,b)=>(a===CAMPS.length-1)-(b===CAMPS.length-1)||CAMPS[a].first.localeCompare(CAMPS[b].first));
+  // shown newest campaign first (by its first post), "Други" last
+  ORDER=CAMPS.map((c,i)=>i).filter(i=>CAMPS[i].n).sort((a,b)=>(a===CAMPS.length-1)-(b===CAMPS.length-1)||CAMPS[b].first.localeCompare(CAMPS[a].first));
   $('#foot').innerHTML=`${POSTS.length} публикации · последно копие от блога: ${fmt(data.updated)} · <a href="${esc(data.blog)}">${esc(data.blog.replace(/^https?:\/\//,''))}</a>`;
   window.addEventListener('hashchange',route); route();
 }
 
 function filtered(){
   const words=norm(state.q).split(/\s+/).filter(Boolean);
-  let r=POSTS.filter(p=>(state.camp===''||p.camp===state.camp)&&(!state.label||p.labels.includes(state.label))&&(!state.year||p.year===state.year)&&words.every(w=>p.hay.includes(w)));
-  if(words.length&&state.sort==='rel'){
+  let r=POSTS.filter(p=>(state.camp===''||p.camp===state.camp)&&words.every(w=>p.hay.includes(w)));
+  // best matches first while searching; otherwise a campaign reads oldest first, everything else newest first
+  if(words.length){
     const score=p=>words.reduce((s,w)=>s+(p.htitle.includes(w)?10:0)+p.hay.split(w).length-1,0);
     r=r.map(p=>[score(p),p]).sort((a,b)=>b[0]-a[0]).map(x=>x[1]);
-  } else r.sort((a,b)=>state.sort==='old'?a.published.localeCompare(b.published):b.published.localeCompare(a.published));
+  } else r.sort((a,b)=>state.camp!==''?a.published.localeCompare(b.published):b.published.localeCompare(a.published));
   return {r,words};
 }
 
@@ -118,25 +112,13 @@ function highlight(t,words){
 }
 
 function renderList(){
-  const labels={}; POSTS.forEach(p=>p.labels.forEach(l=>labels[l]=(labels[l]||0)+1));
-  const years=[...new Set(POSTS.map(p=>p.year))].sort().reverse();
   const campList=`<a class="camp ${state.camp===''?'on':''}" href="#/c/all"><span>Всички кампании</span><small>${POSTS.length} публикации</small></a>`+
     ORDER.map(i=>`<a class="camp ${state.camp===i?'on':''}" href="#/c/${i}"><span>${esc(CAMPS[i].name)}</span><small>${CAMPS[i].years} · ${CAMPS[i].n}</small></a>`).join('');
   $('#app').innerHTML=`<div class="layout"><aside class="side"><details class="camps" ${innerWidth<900?'':'open'}><summary>Кампании</summary>${campList}</details></aside><div class="results"><div class="search">
     <input id="q" type="search" placeholder="Търси име, място, NPC… (напр. Strahd, Шарн)" value="${esc(state.q)}" autocomplete="off">
-    <div class="filters">
-      <button class="chip ${state.label?'':'on'}" data-l="">Всички</button>
-      ${Object.keys(labels).sort((a,b)=>labels[b]-labels[a]).map(l=>`<button class="chip ${state.label===l?'on':''}" data-l="${esc(l)}">${esc(l)} <small>${labels[l]}</small></button>`).join('')}
-      <select id="year"><option value="">Всички години</option>${years.map(y=>`<option ${state.year===y?'selected':''}>${y}</option>`).join('')}</select>
-      <select id="sort"><option value="new">Най-нови</option><option value="old">Най-стари</option><option value="rel">Най-подходящи</option></select>
-    </div></div><div id="res"></div></div></div>`;
-  $('#sort').value=state.sort;
+  </div><div id="res"></div></div></div>`;
   const q=$('#q');
-  q.addEventListener('input',()=>{state.q=q.value;state.shown=30;if(q.value&&state.sort==='new')state.sort='rel',$('#sort').value='rel';renderResults();});
-  $('#year').onchange=e=>{state.year=e.target.value;state.shown=30;renderResults();};
-  $('#sort').onchange=e=>{state.sort=e.target.value;renderResults();};
-  document.querySelectorAll('.chip').forEach(b=>b.onclick=()=>{state.label=b.dataset.l;state.shown=30;
-    document.querySelectorAll('.chip').forEach(c=>c.classList.toggle('on',c===b));renderResults();});
+  q.addEventListener('input',()=>{state.q=q.value;state.shown=30;renderResults();});
   renderResults();
   if(!state.q) q.focus({preventScroll:true});
 }
@@ -170,7 +152,7 @@ function renderPost(p){
 
 function route(){
   const c=location.hash.match(/^#\/c\/(\d+|all)$/);
-  if(c){ state.camp=c[1]==='all'?'':+c[1]; state.shown=30; state.sort=state.q?'rel':(c[1]==='all'?'new':'old'); listScroll=0; renderList(); window.scrollTo(0,0); return; }
+  if(c){ state.camp=c[1]==='all'?'':+c[1]; state.shown=30; listScroll=0; renderList(); window.scrollTo(0,0); return; }
   const m=location.hash.match(/^#\/p\/(.+)$/);
   if(m){ if(!$('article')) listScroll=window.scrollY; const p=POSTS.find(x=>x.slug===m[1]); if(p) return renderPost(p); }
   renderList(); window.scrollTo(0,listScroll);

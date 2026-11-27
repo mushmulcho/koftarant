@@ -1,0 +1,58 @@
+@import url("https://fonts.googleapis.com/css2?family=Ruslan+Display&family=Alegreya+SC:wght@500;700&family=Alegreya:ital,wght@0,400;0,600;1,400&display=swap");
+/* Grimoire: Old World grimoire. Smoky dark leather, parchment text, tarnished gold, oxblood. */
+:root{--accent:var(--gold);--bg:#120e0b;--panel:#1d1712;--line:#3a2e22;--ink:#e6d7b8;--dim:#9a8a6e;--gold:#c9a24a;--blood:#8f1d16;--sc:"Alegreya SC",Georgia,serif}
+*{box-sizing:border-box}
+html{background:var(--bg)}
+body{margin:0;background:var(--bg) radial-gradient(ellipse at 50% -10%,#2a1d12 0%,transparent 60%) no-repeat;color:var(--ink);font:18px/1.7 "Alegreya",Georgia,serif}
+body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:50;box-shadow:inset 0 0 180px 40px #000}
+::selection{background:var(--blood);color:#fff}
+a{color:var(--gold);text-underline-offset:3px}
+header{padding:2.8rem 1rem 2rem;text-align:center;border-bottom:1px solid var(--gold);box-shadow:0 4px 0 -1px var(--bg),0 5px 0 -1px var(--gold)}
+h1{font:400 clamp(2.2rem,6.5vw,4.6rem)/1 "Ruslan Display",serif;margin:0;letter-spacing:.02em;text-shadow:0 2px 0 #000,0 0 24px #5a1a10}
+h1 a{color:var(--ink);text-decoration:none}
+h1 a:hover{color:var(--gold)}
+.sub{font:500 1rem/1.6 var(--sc);letter-spacing:.12em;color:var(--gold);margin:1rem 0 0}
+.sub::before,.sub::after{content:" ✠ ";color:var(--blood)}
+main{max-width:1180px;margin:0 auto;padding:1.4rem 1rem 4rem}
+.layout{display:grid;grid-template-columns:270px minmax(0,1fr);gap:2.4rem;align-items:start}
+.side{position:sticky;top:0;max-height:100vh;overflow:auto;padding:.8rem 0}
+.camps summary{cursor:pointer;font:700 1.05rem/1 var(--sc);letter-spacing:.15em;color:var(--gold);padding:.4rem 0 .8rem;border-bottom:1px solid var(--gold)}
+.camp{display:flex;flex-direction:column;padding:.5rem .7rem;border-bottom:1px solid var(--line);text-decoration:none;color:var(--ink);font:500 1.02rem/1.2 var(--sc)}
+.camp small{font:italic 400 .8rem/1.4 "Alegreya",serif;color:var(--dim);margin-top:.1rem}
+.camp:hover{background:var(--panel);color:var(--gold)}
+.camp.on{background:linear-gradient(90deg,var(--blood),transparent);color:#fff;border-left:3px solid var(--gold)}
+.camp.on small{color:#e6cfa8}
+.post{max-width:820px;margin:0 auto}
+@media(max-width:900px){.layout{grid-template-columns:1fr;gap:1rem}.side{position:static;max-height:none}}
+.search{position:sticky;top:0;z-index:5;background:var(--bg);padding:.8rem 0}
+#q{width:100%;padding:.8rem 1rem;font:italic 400 1.05rem "Alegreya",serif;background:var(--panel);color:var(--ink);border:1px solid var(--line);border-bottom:2px solid var(--gold);border-radius:2px;outline:none}
+#q::placeholder{color:var(--dim)}
+#q:focus{border-color:var(--gold)}
+.count{font:500 .9rem var(--sc);letter-spacing:.1em;color:var(--dim);margin:1.2rem 0 .3rem}
+.item{display:block;padding:1.1rem 0;border-bottom:1px solid var(--line);text-decoration:none;color:inherit}
+.item h2{font:700 1.5rem/1.2 var(--sc);margin:0;color:var(--ink)}
+.item:hover h2{color:var(--gold)}
+.meta{font:italic 400 .85rem/1.7 "Alegreya",serif;color:var(--dim);margin-top:.2rem}
+.tag{display:inline-block;border:1px solid var(--line);padding:0 .45rem;margin-right:.3rem;font:500 .8rem/1.6 var(--sc);color:var(--gold);text-decoration:none;font-style:normal}
+a.tag:hover{border-color:var(--gold)}
+.snip{margin:.4rem 0 0;color:#c4b596;font-size:1rem;line-height:1.6}
+mark{background:#6b1712;color:#fff;padding:0 2px}
+article h2.t{font:700 clamp(2rem,5vw,3rem)/1.1 var(--sc);margin:1rem 0 .6rem;color:var(--ink)}
+.body{margin-top:1.6rem;padding-top:1.4rem;border-top:1px solid var(--gold);overflow-wrap:anywhere}
+.body>:first-child::first-letter,.body>div:first-child>:first-child::first-letter{font:400 3.4em/1 "Ruslan Display",serif;float:left;margin:.05em .12em 0 0;color:var(--blood)}
+.body :not(img,a,[style*="wingdings" i],[style*="symbol" i]){color:inherit!important;font-family:inherit!important;background-color:transparent!important}
+.body img{max-width:100%;height:auto;border:1px solid var(--line);box-shadow:0 6px 20px #000}
+.body a img{display:inline-block}
+.body table{max-width:100%}
+.body blockquote{border-left:3px solid var(--blood);margin-left:0;padding-left:1rem;color:var(--dim);font-style:italic}
+.comments{margin-top:3rem;border-top:1px solid var(--gold)}
+.comments h3{font:700 1.1rem var(--sc);letter-spacing:.12em;color:var(--gold);margin:1.2rem 0 .4rem}
+.comment{padding:.9rem 0;border-bottom:1px solid var(--line);font-size:1rem}
+.nav{display:flex;justify-content:space-between;gap:1rem;margin:2.4rem 0 0;padding-top:1rem;border-top:1px solid var(--gold);font:500 1rem/1.3 var(--sc)}
+.nav a{text-decoration:none}
+.nav a:hover{text-decoration:underline}
+.back{display:inline-block;margin-top:.6rem;font:500 .95rem var(--sc);letter-spacing:.08em;text-decoration:none}
+.more{display:block;margin:1.6rem auto;padding:.6rem 1.8rem;background:var(--panel);border:1px solid var(--gold);color:var(--gold);border-radius:2px;font:700 .95rem var(--sc);letter-spacing:.12em;cursor:pointer}
+.more:hover{background:var(--blood);color:#fff}
+.warn{display:inline-block;background:var(--blood);color:#fff;font:500 .9rem/1.5 var(--sc);padding:.3rem .8rem;border:1px solid var(--gold)}
+footer{font:italic 400 .85rem/1.8 "Alegreya",serif;color:var(--dim);text-align:center;padding:2.4rem 1rem;border-top:1px solid var(--gold)}
